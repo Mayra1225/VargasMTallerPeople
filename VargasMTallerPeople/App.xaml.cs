@@ -1,12 +1,20 @@
-﻿namespace VargasMTallerPeople
+﻿using VargasMTallerPeople.Repositories;
+
+namespace VargasMTallerPeople
 {
     public partial class App : Application
     {
-        public App()
+        public static PersonRepository PersonRepo { get; private set; }
+
+        public App(PersonRepository repo)
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            PersonRepo = repo;
+        }
+        protected override Window CreateWindow(IActivationState activationState)
+        {
+            return new Window(new AppShell());
         }
     }
 }

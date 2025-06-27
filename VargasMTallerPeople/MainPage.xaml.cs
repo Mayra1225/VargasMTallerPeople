@@ -1,25 +1,29 @@
-﻿namespace VargasMTallerPeople
+﻿using VargasMTallerPeople.Models;
+using System.Collections.Generic;
+
+namespace VargasMTallerPeople
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        public void OnNewButtonClicked(object sender, EventArgs args)
         {
-            count++;
+            statusMessage.Text = "";
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            App.PersonRepo.AddNewPerson(newPerson.Text);
+            statusMessage.Text = App.PersonRepo.StatusMessage;
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        public void OnGetButtonClicked(object sender, EventArgs args)
+        {
+            statusMessage.Text = "";
+
+            List<Person> people = App.PersonRepo.GetAllPeople();
+            peopleList.ItemsSource = people;
         }
     }
-
 }

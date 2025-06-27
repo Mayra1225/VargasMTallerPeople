@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using VargasMTallerPeople.Repositories;
 
 namespace VargasMTallerPeople
 {
@@ -18,6 +20,9 @@ namespace VargasMTallerPeople
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            string dbPath = FileAccessHelper.GetLocalFilePath("people.db3");
+            builder.Services.AddSingleton<PersonRepository>(s => ActivatorUtilities.CreateInstance<PersonRepository>(s, dbPath));
 
             return builder.Build();
         }

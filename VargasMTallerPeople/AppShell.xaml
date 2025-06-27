@@ -8,7 +8,7 @@
     Title="VargasMTallerPeople">
 
     <ShellContent
-        Title="Home"
+        Title="People"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
